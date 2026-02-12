@@ -296,36 +296,95 @@ function revealKPI(el, value, sub) {
   el.querySelector(".kpi-sub").innerHTML = sub;
 }
 
-const content = {
+const timelineData = {
   2022: `
-  <p><strong>2022 — Discovery Phase</strong></p>
-  <p>We met — and something just clicked. No overthinking. Just momentum.</p>
-  <ul>
-    <li>🔥 Instant product–market fit.</li>
-    <li>✈ Travel as a default setting.</li>
-    <li>🌙 Long night talks.</li>
-  </ul>
-  <div class="highlight">The chemistry was obvious from day one.</div>
+    <h3>2022 — Discovery Phase</h3>
+    <p>We met — and something just clicked. No overthinking, no explanations needed. Just momentum.</p>
+    <p>It felt like every weekend was a product launch.</p>
+    <ul>
+      <li>🔥 Instant product–market fit (and we both knew it).</li>
+      <li>✈️ Travel wasn’t a bonus feature — it was the default setting.</li>
+      <li>🌙 Long night talks without checking the clock.</li>
+      <li>❤️ High-frequency affection and emotional uptime.</li>
+      <li>😂 First inside jokes and our own shared language.</li>
+    </ul>
+    <div class="highlight">The chemistry was so obvious that doubt didn’t even pass triage.</div>
   `,
+
+  2023: `
+    <h3>2023 — Build Mode: Belgrade Edition</h3>
+    <p>We chose stability. We chose each other. We built a home together.</p>
+    <ul>
+      <li>🏠 First apartment fully furnished together.</li>
+      <li>🛋 IKEA logistics sprint (no relationship incidents).</li>
+      <li>☕ Slow mornings became a ritual.</li>
+      <li>🤝 Learned how to disagree without breaking anything important.</li>
+    </ul>
+    <div class="highlight">Love stopped being fireworks and became foundation.</div>
+  `,
+
+  2024: `
+    <h3>2024 — Ambition & Relocation</h3>
+    <p>Startup energy. Career shifts. Big decisions.</p>
+    <ul>
+      <li>🚀 Worked intensely on our shared project.</li>
+      <li>💼 Both changed jobs.</li>
+      <li>🌍 Moved from Belgrade to Dubai.</li>
+      <li>🧠 Grew resilience under real-world pressure.</li>
+    </ul>
+    <div class="highlight">We proved we can scale under load.</div>
+  `,
+
   2025: `
-  <p><strong>2025 — Meaning Crisis & Relocation</strong></p>
-  <p>Stress tests. Moves. Existential debugging.</p>
-  <ul>
-    <li>💭 Big questions about life direction.</li>
-    <li>🏡 New city, new layer.</li>
-    <li>🌴 "If anything, we move to Bali."</li>
-  </ul>
-  <div class="highlight">We didn’t just survive it — we upgraded.</div>
+    <h3>2025 — London Era & Meaning Crisis</h3>
+    <p>New country. New identity. Some chaos. Some doubt.</p>
+    <ul>
+      <li>🇬🇧 Relocated to London.</li>
+      <li>🤯 Faced a crisis of meaning and constant change.</li>
+      <li>💬 “If anything — we’ll just move to Bali.” became our stabilising joke.</li>
+      <li>❤️ Learned that partnership matters more than geography.</li>
+    </ul>
+    <div class="highlight">We don’t run from uncertainty — we face it together.</div>
   `,
+
+  2026: `
+    <h3>2026 — Maturity & Clarity</h3>
+    <p>Less noise. More intention.</p>
+    <ul>
+      <li>📈 Smarter decisions.</li>
+      <li>🧘 Emotional regulation upgraded.</li>
+      <li>🏗 Building long-term systems, not just moments.</li>
+    </ul>
+    <div class="highlight">From spark to strategy.</div>
+  `,
+
+  2030: `
+    <h3>2030 — Compounded Love</h3>
+    <p>We’re not guessing anymore. We’re designing life deliberately.</p>
+    <ul>
+      <li>🏡 Home base secured.</li>
+      <li>💰 Investments working quietly.</li>
+      <li>🎾 Tennis dates still competitive.</li>
+      <li>✈️ Adventures still deployed quarterly.</li>
+    </ul>
+    <div class="highlight">Built with love. Scaled with care.</div>
+  `,
+
   2040: `
-  <p><strong>2040 — Long-Term Architecture</strong></p>
-  <div class="highlight">
-  Roma, you’re my favourite person to build life with. ❤️
-  </div>
+    <h3>2040 — Freedom Mode</h3>
+    <p>Ocean nearby. Financial independence. Calm confidence.</p>
+    <ul>
+      <li>🏖 Living partly by the beach.</li>
+      <li>📊 Income from assets, not alarms.</li>
+      <li>🎾 Morning tennis. Slow evenings.</li>
+      <li>💬 Still choosing each other daily.</li>
+    </ul>
+    <div class="highlight">Roma, you’re my favourite person to build life with. ❤️</div>
   `
 };
 
 function setYear(el, year) {
+  document.getElementById("timelineContent").innerHTML = timelineData[year];
   document.querySelectorAll(".year").forEach(y => y.classList.remove("active"));
   el.classList.add("active");
   document.getElementById("yearContent").innerHTML = content[year] || "<p>More to be written...</p>";
