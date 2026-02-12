@@ -14,13 +14,27 @@
 }
 
 body{
-  background:linear-gradient(135deg,#f8d7e3,#f3c6d5);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:40px;
-  overflow:hidden;
+  background: linear-gradient(135deg, #f8d7e3, #f3c6d5);
+  min-height: 100vh;
+  padding: 40px;
+  display: block;
+  overflow-y: auto; 
+}
+
+.card{
+  margin: 0 auto;
+}
+
+.hearts-bg{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+  
+.card{
+  position: relative;
+  z-index: 1;
 }
 
 /* ===== LUXURY HEART BACKGROUND ===== */
