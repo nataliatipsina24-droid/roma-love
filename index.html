@@ -24,10 +24,30 @@ body {
   margin: 40px 0;
 }
 
+.kpi-title {
+  font-size: 20px;      /* было меньше */
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.kpi-value {
+  font-size: 16px;      /* меньше чем title */
+  font-style: italic;
+  font-weight: 400;
+}
+
 .kpi-sub {
-  margin-top: 8px;
+  margin-top: 10px;
   font-size: 13px;
   opacity: 0.6;
+  text-align: center;
+}
+
+/* Когда значение раскрыто */
+.kpi.revealed .kpi-value {
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 800;
 }
   
 .hidden { display: none; }
@@ -271,6 +291,7 @@ function backToDashboard() {
 }
 
 function revealKPI(el, value, sub) {
+  el.classList.add("revealed");
   el.querySelector(".kpi-value").innerHTML = value;
   el.querySelector(".kpi-sub").innerHTML = sub;
 }
