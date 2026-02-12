@@ -296,6 +296,8 @@ function revealKPI(el, value, sub) {
   el.querySelector(".kpi-sub").innerHTML = sub;
 }
 
+<div id="timelineContent"></div>
+  
 const timelineData = {
   2022: `
     <h3>2022 — Discovery Phase</h3>
@@ -383,13 +385,25 @@ const timelineData = {
   `
 };
 
+<div class="year" onclick="setYear(this, 2022)">2022</div>
+  
 function setYear(el, year) {
-  document.getElementById("timelineContent").innerHTML = timelineData[year];
-  document.querySelectorAll(".year").forEach(y => y.classList.remove("active"));
-  el.classList.add("active");
-  document.getElementById("yearContent").innerHTML = content[year] || "<p>More to be written...</p>";
-}
+  // вставляем текст
+  const contentBox = document.getElementById("timelineContent");
+  if (contentBox) {
+    contentBox.innerHTML = timelineData[year] || "<p>More to be written...</p>";
+  }
 
+  // убираем активность со всех годов
+  document.querySelectorAll(".year").forEach(y => {
+    y.classList.remove("active");
+  });
+
+  // добавляем активный стиль выбранному
+  if (el) {
+    el.classList.add("active");
+  }
+}
 setYear(document.querySelector(".year.active"), 2022);
 </script>
 
