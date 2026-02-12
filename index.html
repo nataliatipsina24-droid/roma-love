@@ -1,10 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Test</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Roma × Natasha</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8d7e3, #fcecf3);
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  max-width: 600px;
+  width: 100%;
+  padding: 40px;
+  border-radius: 28px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo {
+  width: 100%;
+  height: 320px;
+  background: #f2f2f2;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* 🔥 Replace the image URL below with your photo */
+.photo {
+  background-image: url("YOUR_IMAGE_URL_HERE");
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 24px;
+}
+
+button {
+  background: black;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.signature {
+  margin-top: 20px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.hidden-message {
+  margin-top: 28px;
+  font-size: 20px;
+  line-height: 1.5;
+  display: none;
+}
+
+.footer {
+  margin-top: 30px;
+  font-size: 13px;
+  opacity: 0.4;
+}
+</style>
 </head>
+
 <body>
-  <h1>It works ❤️</h1>
+
+<div class="card">
+  <div class="photo"></div>
+
+  <h1>Happy Valentine's Day ❤️</h1>
+
+  <button onclick="openCard()">Open a card</button>
+
+  <div class="signature">
+    From: vibecoder → To: real developer
+  </div>
+
+  <div class="hidden-message" id="message">
+    Roma, you’re my favourite person to build life with. ❤️  
+    Thank you for being my calm, my chaos, my co-founder,  
+    and my forever adventure.
+  </div>
+
+  <div class="footer">
+    Built with love. Deployed with courage.
+  </div>
+</div>
+
+<script>
+function openCard() {
+  const msg = document.getElementById("message");
+  msg.style.display = "block";
+}
+</script>
+
 </body>
 </html>
