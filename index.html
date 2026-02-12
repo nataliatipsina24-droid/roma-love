@@ -1,349 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Roma × Natasha</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roma × Natasha</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-}
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
 
-body{
-  background:linear-gradient(135deg,#f8d7e3,#f3c6d5);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:40px;
-  overflow:hidden;
-}
+    body {
+      background: linear-gradient(135deg, #f8d7e3, #f3c6d5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-/* ===== LUXURY HEART BACKGROUND ===== */
-.hearts-bg{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  overflow:hidden;
-}
+    /* ===== HEARTS BACKGROUND (blurred blobs) ===== */
+    .hearts-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
 
-.heart-blob{
-  position:absolute;
-  width:220px;
-  height:220px;
-  background:radial-gradient(circle at 30% 30%, rgba(255,92,147,0.45), rgba(255,92,147,0.08));
-  clip-path:path("M110 200 C20 120 0 80 0 50 C0 15 25 0 50 0 C75 0 90 15 110 40 C130 15 145 0 170 0 C195 0 220 15 220 50 C220 80 200 120 110 200 Z");
-  filter:blur(40px);
-  opacity:0.45;
-  animation:floatBlob linear infinite;
-}
+    .heart-blob {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      opacity: 0.18;
+      filter: blur(22px);
+      transform: rotate(-8deg);
+      background: radial-gradient(circle at 30% 30%, rgba(255,92,147,0.55), rgba(255,92,147,0) 60%);
+      clip-path: path("M 260 465 C 260 465 40 325 40 200 C 40 120 95 80 155 80 C 205 80 240 110 260 140 C 280 110 315 80 365 80 C 425 80 480 120 480 200 C 480 325 260 465 260 465 Z");
+    }
 
-@keyframes floatBlob{
-  0%{transform:translateY(0) translateX(0) scale(1);}
-  50%{transform:translateY(-120px) translateX(40px) scale(1.1);}
-  100%{transform:translateY(-240px) translateX(-30px) scale(1);}
-}
+    .heart-blob.b2 {
+      width: 650px;
+      height: 650px;
+      opacity: 0.14;
+      filter: blur(30px);
+      transform: rotate(10deg);
+      background: radial-gradient(circle at 35% 35%, rgba(255,160,190,0.55), rgba(255,160,190,0) 62%);
+    }
 
-/* keep content above */
-.card{
-  position:relative;
-  z-index:2;
-  background:white;
-  border-radius:28px;
-  padding:50px;
-  max-width:1000px;
-  width:100%;
-  box-shadow:0 30px 60px rgba(0,0,0,0.08);
-  text-align:center;
-  animation:fadeIn .6s ease;
-}
+    .heart-blob.b3 {
+      width: 460px;
+      height: 460px;
+      opacity: 0.12;
+      filter: blur(26px);
+      transform: rotate(-14deg);
+      background: radial-gradient(circle at 35% 35%, rgba(255,92,147,0.45), rgba(255,92,147,0) 64%);
+    }
 
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(10px);}
-  to{opacity:1;transform:translateY(0);}
-}
+    .hidden { display: none; }
 
-.hidden{display:none;}
+    .card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 28px;
+      padding: 50px;
+      max-width: 1000px;
+      width: 100%;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(2px);
+    }
 
-h1{font-size:52px;margin-bottom:16px;}
-h2{font-size:37px;margin-bottom:26px;}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-button{
-  background:black;
-  color:white;
-  padding:14px 28px;
-  border-radius:999px;
-  border:none;
-  cursor:pointer;
-  font-size:16px;
-  transition:.25s;
-}
+    h1 {
+      font-size: 52px;
+      margin-bottom: 16px;
+      letter-spacing: -0.6px;
+    }
 
-button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 20px rgba(0,0,0,0.15);
-}
+    h2 {
+      font-size: 37px; /* Core KPIs +5pt */
+      margin-bottom: 26px;
+      letter-spacing: -0.4px;
+    }
 
-.subtitle{
-  margin-top:14px;
-  opacity:.6;
-  font-size:14px;
-}
+    button {
+      background: black;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
 
-/* ===== KPI GRID ===== */
-.kpi-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  margin:34px 0 26px;
-}
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
 
-.kpi{
-  border:1px solid #eee;
-  border-radius:20px;
-  padding:22px;
-  cursor:pointer;
-  transition:.25s;
-  text-align:center;
-}
+    .subtitle {
+      margin-top: 14px;
+      opacity: 0.6;
+      font-size: 14px;
+    }
 
-.kpi:hover{
-  transform:translateY(-3px) scale(1.02);
-  box-shadow:0 10px 22px rgba(0,0,0,0.06);
-}
+    /* KPI GRID */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 34px 0 26px;
+    }
 
-.kpi-title{
-  font-size:20px;
-  font-weight:700;
-  margin-bottom:12px;
-}
+    .kpi {
+      border: 1px solid #eee;
+      border-radius: 20px;
+      padding: 22px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+    }
 
-.kpi-value{
-  font-size:14px;
-  font-style:italic;
-  font-weight:500;
-}
+    /* subtle hover-zoom */
+    .kpi:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+    }
 
-.kpi-sub{
-  margin-top:10px;
-  font-size:13px;
-  opacity:.6;
-  min-height:16px;
-}
+    .kpi-title {
+      font-size: 20px;          /* +2pt */
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
 
-.kpi.revealed .kpi-value{
-  font-size:30px;
-  font-weight:800;
-  font-style:normal;
-}
+    .kpi-value {
+      font-size: 14px;          /* -2pt */
+      font-style: italic;
+      font-weight: 500;
+      opacity: 0.95;
+    }
 
-/* ===== TIMELINE ===== */
-.timeline-title{
-  font-size:40px;
-  margin-bottom:22px;
-}
+    .kpi-sub {
+      margin-top: 10px;
+      font-size: 13px;
+      opacity: 0.6;
+      text-align: center;       /* centered */
+      min-height: 16px;         /* no jump */
+    }
 
-.years{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:18px 0 26px;
-  position:relative;
-  gap:10px;
-}
+    /* revealed state */
+    .kpi.revealed .kpi-value {
+      font-size: 30px;
+      font-style: normal;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
 
-.years::before{
-  content:"";
-  position:absolute;
-  top:50%;
-  left:0;
-  right:0;
-  height:2px;
-  background:#ddd;
-  z-index:0;
-}
+    /* TIMELINE */
+    .timeline-title {
+      font-size: 40px;
+      margin-bottom: 22px;
+      letter-spacing: -0.4px;
+    }
 
-.year{
-  position:relative;
-  background:white;
-  border:1px solid #ddd;
-  border-radius:999px;
-  width:70px;
-  height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  z-index:1;
-  font-weight:700;
-  transition:.2s;
-}
+    .years {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 18px 0 18px;
+      position: relative;
+      gap: 10px;
+    }
 
-.year:hover{transform:translateY(-2px);}
+    .years::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #ddd;
+      z-index: 0;
+    }
 
-.year.active{
-  background:#ff5c93;
-  color:white;
-  border:none;
-}
+    .year {
+      position: relative;
+      background: white;
+      border: 1px solid #ddd;   /* thin grey like timeline line */
+      border-radius: 999px;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;  /* centered text */
+      cursor: pointer;
+      z-index: 1;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border 0.2s ease;
+      user-select: none;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
 
-.year.active::after{
-  content:"💗";
-  position:absolute;
-  top:-20px;
-  font-size:18px;
-}
+    .year:hover { transform: translateY(-2px); }
 
-.year-content{
-  text-align:left;
-  margin-top:16px;
-  line-height:1.65;
-  font-size:15px;
-}
+    .year.active {
+      background: #ff5c93;
+      color: #fff;              /* white contrast */
+      border: none;
+      box-shadow: 0 10px 22px rgba(255,92,147,0.25);
+    }
 
-.highlight{
-  margin-top:16px;
-  padding:12px 16px;
-  background:#f9f9f9;
-  border-radius:14px;
-  font-weight:650;
-}
+    /* heart only on active */
+    .year.active::after {
+      content: "💗";
+      position: absolute;
+      top: -18px;
+      font-size: 18px;
+    }
 
-@media(max-width:900px){
-  .kpi-grid{grid-template-columns:1fr;}
-  .card{padding:28px;}
-  h1{font-size:40px;}
-  h2{font-size:30px;}
-}
-</style>
+    .year-content {
+      text-align: left;
+      margin-top: 12px;
+      line-height: 1.65;
+      font-size: 15px;
+      padding-top: 6px;
+    }
+
+    .year-content h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .year-content p {
+      margin: 8px 0;
+      opacity: 0.95;
+    }
+
+    .year-content ul {
+      margin: 10px 0 0 18px;
+    }
+
+    .year-content li {
+      margin: 6px 0;
+    }
+
+    .highlight {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: #f9f9f9;
+      border-radius: 14px;
+      font-weight: 650;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .timeline-actions {
+      margin-top: 22px;
+      text-align: left;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+      .card { padding: 28px; }
+      h1 { font-size: 40px; }
+      h2 { font-size: 30px; }
+      .years { gap: 6px; }
+      .year { width: 62px; height: 62px; }
+      .heart-blob, .heart-blob.b2, .heart-blob.b3 { width: 380px; height: 380px; }
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Background blobs (behind cards) -->
+  <div class="hearts-bg" aria-hidden="true">
+    <div class="heart-blob" style="left:-120px; top:-140px;"></div>
+    <div class="heart-blob b2" style="right:-220px; top:40px;"></div>
+    <div class="heart-blob b3" style="left:140px; bottom:-220px;"></div>
+    <div class="heart-blob b2" style="right:120px; bottom:-260px;"></div>
+    <div class="heart-blob" style="left:62vw; top:-260px; opacity:0.10;"></div>
+  </div>
 
-<div class="hearts-bg"></div>
+  <!-- 1) VALENTINE ENTRY -->
+  <div id="valentine" class="card">
+    <h1>Happy Valentine's Day ❤️</h1>
+    <button id="openCardBtn" type="button">Open a card</button>
+    <div class="subtitle">From: vibecoder → To: real developer</div>
+  </div>
 
-<div id="valentine" class="card">
-  <h1>Happy Valentine's Day ❤️</h1>
-  <button id="openCardBtn">Open a card</button>
-  <div class="subtitle">From: vibecoder → To: real developer</div>
-</div>
+  <!-- 2) DASHBOARD -->
+  <div id="dashboard" class="card hidden">
+    <h1>Roma × Natasha</h1>
+    <h2>Core KPIs</h2>
 
-<div id="dashboard" class="card hidden">
-  <h1>Roma × Natasha</h1>
-  <h2>Core KPIs</h2>
+    <div class="kpi-grid">
+      <div class="kpi" data-value="233" data-sub="±12% seasonal variation">
+        <div class="kpi-title">❤️ Love Expressions Logged</div>
+        <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
+        <div class="kpi-sub"></div>
+      </div>
 
-  <div class="kpi-grid">
-    <div class="kpi" data-value="233" data-sub="±12% seasonal variation">
-      <div class="kpi-title">❤️ Love Expressions Logged</div>
-      <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
-      <div class="kpi-sub"></div>
+      <div class="kpi" data-value="318" data-sub="Peak on Sundays">
+        <div class="kpi-title">😂 Shared Laugh Events</div>
+        <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
+        <div class="kpi-sub"></div>
+      </div>
+
+      <div class="kpi" data-value="2h 3m 12s" data-sub="During conflicts: 6h">
+        <div class="kpi-title">⏳ Median Reply Time</div>
+        <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
+        <div class="kpi-sub"></div>
+      </div>
+
+      <div class="kpi" data-value="125" data-sub="Above expectations">
+        <div class="kpi-title">🎧 Video Messages From Roma</div>
+        <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
+        <div class="kpi-sub"></div>
+      </div>
+
+      <div class="kpi" data-value="18" data-sub="More to come">
+        <div class="kpi-title">✈ Adventures Deployed</div>
+        <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
+        <div class="kpi-sub"></div>
+      </div>
+
+      <div class="kpi" data-value="97.8%" data-sub="System self-heals quickly">
+        <div class="kpi-title">🔥 Conflict Recovery Rate</div>
+        <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
+        <div class="kpi-sub"></div>
+      </div>
     </div>
 
-    <div class="kpi" data-value="318" data-sub="Peak on Sundays">
-      <div class="kpi-title">😂 Shared Laugh Events</div>
-      <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
-      <div class="kpi-sub"></div>
+    <button id="viewTimelineBtn" type="button">View Timeline</button>
+  </div>
+
+  <!-- 3) TIMELINE -->
+  <div id="timeline" class="card hidden">
+    <h2 class="timeline-title">Long-Term Product Vision</h2>
+
+    <div class="years" id="yearsRow">
+      <div class="year active" data-year="2022">2022</div>
+      <div class="year" data-year="2023">2023</div>
+      <div class="year" data-year="2024">2024</div>
+      <div class="year" data-year="2025">2025</div>
+      <div class="year" data-year="2026">2026</div>
+      <div class="year" data-year="2030">2030</div>
+      <div class="year" data-year="2040">2040</div>
     </div>
 
-    <div class="kpi" data-value="2h 3m 12s" data-sub="During conflicts: 6h">
-      <div class="kpi-title">⏳ Median Reply Time</div>
-      <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
-      <div class="kpi-sub"></div>
-    </div>
+    <div id="yearContent" class="year-content"></div>
 
-    <div class="kpi" data-value="125" data-sub="Above expectations">
-      <div class="kpi-title">🎧 Video Messages From Roma</div>
-      <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
-      <div class="kpi-sub"></div>
-    </div>
-
-    <div class="kpi" data-value="18" data-sub="More to come">
-      <div class="kpi-title">✈ Adventures Deployed</div>
-      <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
-      <div class="kpi-sub"></div>
-    </div>
-
-    <div class="kpi" data-value="97.8%" data-sub="System self-heals quickly">
-      <div class="kpi-title">🔥 Conflict Recovery Rate</div>
-      <div class="kpi-value">👉🏼Tap to reveal👈🏼</div>
-      <div class="kpi-sub"></div>
+    <div class="timeline-actions">
+      <button id="backBtn" type="button">← Back</button>
     </div>
   </div>
 
-  <button id="viewTimelineBtn">View Timeline</button>
-</div>
+  <script>
+    // ===== DATA =====
+    const timelineData = {
+      2022: `
+        <h3>2022 — Discovery Phase</h3>
+        <p>We met — and something just clicked. No overthinking, no explanations needed. Just momentum.</p>
+        <p>It felt like every weekend was a product launch.</p>
+        <ul>
+          <li>🔥 Instant product–market fit (and we both knew it).</li>
+          <li>✈️ Travel wasn’t a bonus feature — it was the default setting.</li>
+          <li>🌙 Long night talks without checking the clock.</li>
+          <li>❤️ High-frequency affection and emotional uptime.</li>
+          <li>😂 First inside jokes and our own shared language.</li>
+        </ul>
+        <div class="highlight">The chemistry was so obvious that doubt didn’t even pass triage.</div>
+      `,
+      2023: `
+        <h3>2023 — Build Mode: Belgrade Edition</h3>
+        <p>We chose stability. We chose each other. We built a home together.</p>
+        <ul>
+          <li>🏠 First apartment fully furnished together.</li>
+          <li>🛋 IKEA logistics sprint (no relationship incidents).</li>
+          <li>☕ Slow mornings became a ritual.</li>
+          <li>🤝 Learned how to disagree without breaking anything important.</li>
+        </ul>
+        <div class="highlight">Love stopped being fireworks and became foundation.</div>
+      `,
+      2024: `
+        <h3>2024 — Ambition & Relocation</h3>
+        <p>Startup energy. Career shifts. Big decisions.</p>
+        <ul>
+          <li>🚀 Worked intensely on our shared project.</li>
+          <li>💼 Both changed jobs.</li>
+          <li>🌍 Moved from Belgrade to Dubai.</li>
+          <li>🧠 Grew resilience under real-world pressure.</li>
+        </ul>
+        <div class="highlight">We proved we can scale under load.</div>
+      `,
+      2025: `
+        <h3>2025 — London Era & Meaning Crisis</h3>
+        <p>New country. New identity. Some chaos. Some doubt.</p>
+        <ul>
+          <li>🇬🇧 Relocated to London.</li>
+          <li>🤯 Faced a crisis of meaning and constant change.</li>
+          <li>💬 “If anything — we’ll just move to Bali.” became our stabilising joke.</li>
+          <li>❤️ Learned that partnership matters more than geography.</li>
+        </ul>
+        <div class="highlight">We don’t run from uncertainty — we face it together.</div>
+      `,
+      2026: `
+        <h3>2026 — Maturity & Clarity</h3>
+        <p>Less noise. More intention.</p>
+        <ul>
+          <li>📈 Smarter decisions.</li>
+          <li>🧘 Emotional regulation upgraded.</li>
+          <li>🏗 Building long-term systems, not just moments.</li>
+        </ul>
+        <div class="highlight">From spark to strategy.</div>
+      `,
+      2030: `
+        <h3>2030 — Compounded Love</h3>
+        <p>We’re not guessing anymore. We’re designing life deliberately.</p>
+        <ul>
+          <li>🏡 Home base secured.</li>
+          <li>💰 Investments working quietly.</li>
+          <li>🎾 Tennis dates still competitive.</li>
+          <li>✈️ Adventures still deployed quarterly.</li>
+        </ul>
+        <div class="highlight">Built with love. Scaled with care.</div>
+      `,
+      2040: `
+        <h3>2040 — Freedom Mode</h3>
+        <p>Ocean nearby. Financial independence. Calm confidence.</p>
+        <ul>
+          <li>🏖 Living partly by the beach.</li>
+          <li>📊 Income from assets, not alarms.</li>
+          <li>🎾 Morning tennis. Slow evenings.</li>
+          <li>💬 Still choosing each other daily.</li>
+        </ul>
+        <div class="highlight">Roma, you’re my favourite person to build life with. ❤️</div>
+      `
+    };
 
-<div id="timeline" class="card hidden">
-  <h2 class="timeline-title">Long-Term Product Vision</h2>
+    // ===== NAV ELEMENTS =====
+    const valentineEl = document.getElementById("valentine");
+    const dashboardEl = document.getElementById("dashboard");
+    const timelineEl  = document.getElementById("timeline");
+    const yearContentEl = document.getElementById("yearContent");
 
-  <div class="years">
-    <div class="year active" data-year="2022">2022</div>
-    <div class="year" data-year="2023">2023</div>
-    <div class="year" data-year="2024">2024</div>
-    <div class="year" data-year="2025">2025</div>
-    <div class="year" data-year="2026">2026</div>
-    <div class="year" data-year="2030">2030</div>
-    <div class="year" data-year="2040">2040</div>
-  </div>
+    document.getElementById("openCardBtn").addEventListener("click", openCard);
+    document.getElementById("viewTimelineBtn").addEventListener("click", openTimeline);
+    document.getElementById("backBtn").addEventListener("click", backToDashboard);
 
-  <div id="yearContent" class="year-content"></div>
-  <button id="backBtn">← Back</button>
-</div>
+    function openCard() {
+      valentineEl.classList.add("hidden");
+      dashboardEl.classList.remove("hidden");
+    }
 
-<script>
-const timelineData = {
-  2022:`<h3>2022 — Discovery Phase</h3><p>We met — and something just clicked.</p>`,
-  2023:`<h3>2023 — Build Mode</h3><p>We chose each other.</p>`,
-  2024:`<h3>2024 — Relocation</h3><p>Big moves.</p>`,
-  2025:`<h3>2025 — London Era</h3><p>Growth under uncertainty.</p>`,
-  2026:`<h3>2026 — Maturity</h3><p>More intention.</p>`,
-  2030:`<h3>2030 — Compounded Love</h3><p>Designed life.</p>`,
-  2040:`<h3>2040 — Freedom Mode</h3><p>Built with love. ❤️</p>`
-};
+    function openTimeline() {
+      dashboardEl.classList.add("hidden");
+      timelineEl.classList.remove("hidden");
 
-const valentineEl=document.getElementById("valentine");
-const dashboardEl=document.getElementById("dashboard");
-const timelineEl=document.getElementById("timeline");
-const yearContentEl=document.getElementById("yearContent");
+      const active = document.querySelector(".year.active") || document.querySelector(".year[data-year='2022']");
+      const year = active ? Number(active.dataset.year) : 2022;
+      setYear(active, year);
+    }
 
-document.getElementById("openCardBtn").onclick=()=>{valentineEl.classList.add("hidden");dashboardEl.classList.remove("hidden");};
-document.getElementById("viewTimelineBtn").onclick=()=>{dashboardEl.classList.add("hidden");timelineEl.classList.remove("hidden");setYear(document.querySelector(".year.active"),2022);};
-document.getElementById("backBtn").onclick=()=>{timelineEl.classList.add("hidden");dashboardEl.classList.remove("hidden");};
+    function backToDashboard() {
+      timelineEl.classList.add("hidden");
+      dashboardEl.classList.remove("hidden");
+    }
 
-document.querySelectorAll(".kpi").forEach(k=>{
-  k.onclick=()=>{
-    k.classList.add("revealed");
-    k.querySelector(".kpi-value").textContent=k.dataset.value;
-    k.querySelector(".kpi-sub").textContent=k.dataset.sub;
-  };
-});
+    // ===== KPI REVEAL =====
+    document.querySelectorAll(".kpi").forEach(kpi => {
+      kpi.addEventListener("click", () => {
+        const value = kpi.dataset.value || "";
+        const sub = kpi.dataset.sub || "";
+        kpi.classList.add("revealed");
+        kpi.querySelector(".kpi-value").textContent = value;
+        kpi.querySelector(".kpi-sub").textContent = sub;
+      });
+    });
 
-document.querySelectorAll(".year").forEach(y=>{
-  y.onclick=()=>setYear(y,Number(y.dataset.year));
-});
+    // ===== TIMELINE =====
+    document.querySelectorAll(".year").forEach(y => {
+      y.addEventListener("click", () => {
+        const year = Number(y.dataset.year);
+        setYear(y, year);
+      });
+    });
 
-function setYear(el,year){
-  yearContentEl.innerHTML=timelineData[year]||"<p>More soon…</p>";
-  document.querySelectorAll(".year").forEach(y=>y.classList.remove("active"));
-  if(el)el.classList.add("active");
-}
+    function setYear(el, year) {
+      // 1) render content
+      yearContentEl.innerHTML = timelineData[year] || "<p>More to be written...</p>";
 
-/* generate luxury heart blobs */
-const hearts=document.querySelector(".hearts-bg");
-for(let i=0;i<6;i++){
-  const blob=document.createElement("div");
-  blob.className="heart-blob";
-  blob.style.left=Math.random()*100+"vw";
-  blob.style.top=Math.random()*100+"vh";
-  blob.style.animationDuration=20+Math.random()*20+"s";
-  hearts.appendChild(blob);
-}
-</script>
-
+      // 2) active state
+      document.querySelectorAll(".year").forEach(y => y.classList.remove("active"));
+      if (el) el.classList.add("active");
+    }
+  </script>
 </body>
 </html>
