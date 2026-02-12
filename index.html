@@ -233,6 +233,8 @@
 
 <body>
 
+<div class="hearts-bg"></div>
+  
   <!-- 1) VALENTINE ENTRY -->
   <div id="valentine" class="card">
     <h1>Happy Valentine's Day ❤️</h1>
@@ -451,6 +453,22 @@
 
     // preload 2022 content when opening timeline later (safe)
     // (не открывает таймлайн сам, просто готовит данные)
+
+    // ===== HEART BACKGROUND =====
+const heartsContainer = document.querySelector(".hearts-bg");
+
+for (let i = 0; i < 12; i++) {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💗";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = 15 + Math.random() * 15 + "s";
+  heart.style.animationDelay = Math.random() * 20 + "s";
+  heart.style.fontSize = 80 + Math.random() * 100 + "px";
+
+  heartsContainer.appendChild(heart);
+}
   </script>
 
 </body>
