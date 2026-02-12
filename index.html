@@ -6,244 +6,311 @@
 <title>Roma × Natasha</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
 
 body {
-  background: linear-gradient(135deg, #f8d7e3, #fcecf3);
+  background: linear-gradient(135deg, #f8d7e3, #f3c6d5);
   min-height: 100vh;
-  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
 }
 
-/* ---- Screens ---- */
-
-.screen {
-  display: none;
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 40px 0;
 }
 
-.active {
-  display: block;
+.kpi-sub {
+  margin-top: 8px;
+  font-size: 13px;
+  opacity: 0.6;
 }
-
-/* ---- Card ---- */
+  
+.hidden { display: none; }
 
 .card {
-  max-width: 900px;
-  margin: auto;
   background: white;
-  padding: 40px;
-  border-radius: 30px;
+  border-radius: 28px;
+  padding: 50px;
+  max-width: 1000px;
+  width: 100%;
   box-shadow: 0 30px 60px rgba(0,0,0,0.08);
   text-align: center;
+  animation: fadeIn 0.6s ease;
 }
 
-/* ---- Hero Screen ---- */
-
-.photo {
-  width: 100%;
-  height: 300px;
-  border-radius: 20px;
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 30px;
-  background-image: url("YOUR_IMAGE_URL_HERE");
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
-  font-size: 42px;
+  font-size: 52px;
   margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
 }
 
 button {
   background: black;
   color: white;
-  border: none;
   padding: 14px 28px;
   border-radius: 999px;
-  font-size: 16px;
+  border: none;
   cursor: pointer;
-  margin-top: 20px;
-  transition: 0.25s ease;
+  font-size: 16px;
+  transition: 0.3s;
 }
 
 button:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-.signature {
-  margin-top: 18px;
-  font-size: 14px;
+.subtitle {
+  margin-top: 15px;
   opacity: 0.6;
+  font-size: 14px;
 }
 
-/* ---- KPI Grid ---- */
-
-.grid {
+.kpi-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-top: 30px;
+  margin: 40px 0;
 }
 
 .kpi {
   border: 1px solid #eee;
   border-radius: 20px;
-  padding: 20px;
+  padding: 25px;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: 0.3s;
 }
 
 .kpi:hover {
   transform: translateY(-4px);
 }
 
-.kpi h3 {
+.kpi-title {
+  font-weight: 600;
   margin-bottom: 10px;
-  font-size: 18px;
 }
 
 .kpi-value {
-  font-size: 28px;
-  font-weight: bold;
-  margin-top: 10px;
-  display: none;
+  font-size: 34px;
+  font-weight: 700;
 }
 
-.timeline-btn {
-  margin-top: 30px;
+.timeline {
+  margin-top: 40px;
 }
 
-/* ---- Timeline ---- */
-
-.timeline-years {
+.years {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.years::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ddd;
+  z-index: 0;
 }
 
 .year {
-  border: 1px solid #ccc;
-  padding: 12px 18px;
-  border-radius: 999px;
+  position: relative;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: 0.2s ease;
+  z-index: 1;
+  transition: 0.3s;
 }
 
-.year.active-year {
-  background: #ff4d88;
+.year.active {
+  background: #ff5c93;
   color: white;
-  border-color: #ff4d88;
+  border: none;
 }
 
-.timeline-content {
-  margin-top: 30px;
+.year.active::after {
+  content: "💗";
+  position: absolute;
+  top: -20px;
+  font-size: 18px;
+}
+
+.year-content {
   text-align: left;
+  margin-top: 20px;
   line-height: 1.6;
 }
 
-.back-btn {
-  margin-top: 30px;
+.highlight {
+  margin-top: 15px;
+  padding: 12px 16px;
+  background: #f9f9f9;
+  border-radius: 14px;
+  font-weight: 600;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SCREEN 1 -->
-<div class="screen active" id="hero">
-  <div class="card">
-    <div class="photo"></div>
-    <h1>Happy Valentine's Day ❤️</h1>
-    <button onclick="goToDashboard()">Open a card</button>
-    <div class="signature">
-      From: vibecoder → To: real developer
-    </div>
-  </div>
+<!-- 1️⃣ VALENTINE ENTRY -->
+<div id="valentine" class="card">
+  <h1>Happy Valentine's Day ❤️</h1>
+  <button onclick="openCard()">Open a card</button>
+  <div class="subtitle">From: vibecoder → To: real developer</div>
 </div>
 
-<!-- SCREEN 2 -->
-<div class="screen" id="dashboard">
-  <div class="card">
-    <h1>Roma × Natasha</h1>
-    <p>Core KPIs</p>
+<!-- 2️⃣ DASHBOARD -->
+<div id="dashboard" class="card hidden">
+  <h1>Roma × Natasha</h1>
+  <h2>Core KPIs</h2>
 
-    <div class="grid">
-      <div class="kpi" onclick="reveal(this)">
-        <h3>❤️ Love Expressions</h3>
-        <div class="kpi-value">233</div>
-      </div>
+  <div class="kpi-grid">
 
-      <div class="kpi" onclick="reveal(this)">
-        <h3>😂 Shared Laughs</h3>
-        <div class="kpi-value">318</div>
-      </div>
-
-      <div class="kpi" onclick="reveal(this)">
-        <h3>✈ Adventures</h3>
-        <div class="kpi-value">18</div>
-      </div>
-    </div>
-
-    <button class="timeline-btn" onclick="goToTimeline()">View Timeline</button>
+  <div class="kpi" onclick="revealKPI(this, '233', '±12% seasonal variation')">
+    <div class="kpi-title">❤️ Love Expressions Logged</div>
+    <div class="kpi-value">👉 Tap to reveal 👈</div>
+    <div class="kpi-sub"></div>
   </div>
+
+  <div class="kpi" onclick="revealKPI(this, '318', 'Peak on Sundays')">
+    <div class="kpi-title">😂 Shared Laugh Events</div>
+    <div class="kpi-value">👉 Tap to reveal 👈</div>
+    <div class="kpi-sub"></div>
+  </div>
+
+  <div class="kpi" onclick="revealKPI(this, '2h 3m 12s', 'During conflicts: 6h')">
+    <div class="kpi-title">⏳ Median Reply Time</div>
+    <div class="kpi-value">👉 Tap to reveal 👈</div>
+    <div class="kpi-sub"></div>
+  </div>
+
+  <div class="kpi" onclick="revealKPI(this, '125', 'Above expectations')">
+    <div class="kpi-title">🎧 Video Messages From Roma</div>
+    <div class="kpi-value">👉 Tap to reveal 👈</div>
+    <div class="kpi-sub"></div>
+  </div>
+
+  <div class="kpi" onclick="revealKPI(this, '18', 'More to come')">
+    <div class="kpi-title">✈ Adventures Deployed</div>
+    <div class="kpi-value">👉 Tap to reveal 👈</div>
+    <div class="kpi-sub"></div>
+  </div>
+
+  <div class="kpi" onclick="revealKPI(this, '97.8%', 'System self-heals quickly')">
+    <div class="kpi-title">🔥 Conflict Recovery Rate</div>
+    <div class="kpi-value">👉 Tap to reveal 👈</div>
+    <div class="kpi-sub"></div>
+  </div>
+
 </div>
 
-<!-- SCREEN 3 -->
-<div class="screen" id="timeline">
-  <div class="card">
-    <h1>Long-Term Product Vision</h1>
+  <button onclick="openTimeline()">View Timeline</button>
+</div>
 
-    <div class="timeline-years">
-      <div class="year active-year" onclick="showYear(2022, this)">2022</div>
-      <div class="year" onclick="showYear(2023, this)">2023</div>
-      <div class="year" onclick="showYear(2024, this)">2024</div>
-      <div class="year" onclick="showYear(2025, this)">2025</div>
-      <div class="year" onclick="showYear(2040, this)">2040</div>
-    </div>
+<!-- 3️⃣ TIMELINE -->
+<div id="timeline" class="card hidden">
+  <h2>Long-Term Product Vision</h2>
 
-    <div class="timeline-content" id="timelineText">
-      We met — instant product-market fit.
-    </div>
-
-    <button class="back-btn" onclick="goToDashboard()">← Back</button>
+  <div class="years">
+    <div class="year active" onclick="setYear(this, 2022)">2022</div>
+    <div class="year" onclick="setYear(this, 2023)">2023</div>
+    <div class="year" onclick="setYear(this, 2024)">2024</div>
+    <div class="year" onclick="setYear(this, 2025)">2025</div>
+    <div class="year" onclick="setYear(this, 2026)">2026</div>
+    <div class="year" onclick="setYear(this, 2030)">2030</div>
+    <div class="year" onclick="setYear(this, 2040)">2040</div>
   </div>
+
+  <div id="yearContent" class="year-content"></div>
+
+  <button onclick="backToDashboard()">← Back</button>
 </div>
 
 <script>
-
-function goToDashboard() {
-  document.getElementById("hero").classList.remove("active");
-  document.getElementById("dashboard").classList.add("active");
+function openCard() {
+  document.getElementById("valentine").classList.add("hidden");
+  setTimeout(() => {
+    document.getElementById("dashboard").classList.remove("hidden");
+  }, 400);
 }
 
-function goToTimeline() {
-  document.getElementById("dashboard").classList.remove("active");
-  document.getElementById("timeline").classList.add("active");
+function openTimeline() {
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("timeline").classList.remove("hidden");
+  setYear(document.querySelector(".year.active"), 2022);
 }
 
-function reveal(el) {
-  el.querySelector(".kpi-value").style.display = "block";
+function backToDashboard() {
+  document.getElementById("timeline").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
 }
 
-function showYear(year, el) {
-  document.querySelectorAll(".year").forEach(y => y.classList.remove("active-year"));
-  el.classList.add("active-year");
-
-  const texts = {
-    2022: "Discovery phase. We met. It clicked.",
-    2023: "Belgrade era. First home together.",
-    2024: "Startup mode. Dubai relocation.",
-    2025: "London. Identity shift. Growth.",
-    2040: "Living on returns. Playing tennis by the ocean."
-  };
-
-  document.getElementById("timelineText").innerText = texts[year];
+function revealKPI(el, value, sub) {
+  el.querySelector(".kpi-value").innerHTML = value;
+  el.querySelector(".kpi-sub").innerHTML = sub;
 }
 
+const content = {
+  2022: `
+  <p><strong>2022 — Discovery Phase</strong></p>
+  <p>We met — and something just clicked. No overthinking. Just momentum.</p>
+  <ul>
+    <li>🔥 Instant product–market fit.</li>
+    <li>✈ Travel as a default setting.</li>
+    <li>🌙 Long night talks.</li>
+  </ul>
+  <div class="highlight">The chemistry was obvious from day one.</div>
+  `,
+  2025: `
+  <p><strong>2025 — Meaning Crisis & Relocation</strong></p>
+  <p>Stress tests. Moves. Existential debugging.</p>
+  <ul>
+    <li>💭 Big questions about life direction.</li>
+    <li>🏡 New city, new layer.</li>
+    <li>🌴 "If anything, we move to Bali."</li>
+  </ul>
+  <div class="highlight">We didn’t just survive it — we upgraded.</div>
+  `,
+  2040: `
+  <p><strong>2040 — Long-Term Architecture</strong></p>
+  <div class="highlight">
+  Roma, you’re my favourite person to build life with. ❤️
+  </div>
+  `
+};
+
+function setYear(el, year) {
+  document.querySelectorAll(".year").forEach(y => y.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("yearContent").innerHTML = content[year] || "<p>More to be written...</p>";
+}
+
+setYear(document.querySelector(".year.active"), 2022);
 </script>
 
 </body>
