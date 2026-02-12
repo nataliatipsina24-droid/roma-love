@@ -14,44 +14,48 @@
 }
 
 body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: linear-gradient(135deg, #f8d7e3, #fcecf3);
-  padding: 20px;
+  min-height: 100vh;
+  padding: 40px 20px;
 }
+
+/* ---- Screens ---- */
+
+.screen {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+/* ---- Card ---- */
 
 .card {
+  max-width: 900px;
+  margin: auto;
   background: white;
-  max-width: 600px;
-  width: 100%;
   padding: 40px;
-  border-radius: 28px;
+  border-radius: 30px;
   box-shadow: 0 30px 60px rgba(0,0,0,0.08);
   text-align: center;
-  position: relative;
-  overflow: hidden;
 }
+
+/* ---- Hero Screen ---- */
 
 .photo {
   width: 100%;
-  height: 320px;
-  background: #f2f2f2;
+  height: 300px;
   border-radius: 20px;
-  margin-bottom: 30px;
   background-size: cover;
   background-position: center;
-}
-
-/* 🔥 Replace the image URL below with your photo */
-.photo {
+  margin-bottom: 30px;
   background-image: url("YOUR_IMAGE_URL_HERE");
 }
 
 h1 {
   font-size: 42px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 button {
@@ -62,64 +66,184 @@ button {
   border-radius: 999px;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  margin-top: 20px;
+  transition: 0.25s ease;
 }
 
 button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
 }
 
 .signature {
-  margin-top: 20px;
+  margin-top: 18px;
   font-size: 14px;
   opacity: 0.6;
 }
 
-.hidden-message {
-  margin-top: 28px;
-  font-size: 20px;
-  line-height: 1.5;
+/* ---- KPI Grid ---- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.kpi {
+  border: 1px solid #eee;
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.kpi:hover {
+  transform: translateY(-4px);
+}
+
+.kpi h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
   display: none;
 }
 
-.footer {
+.timeline-btn {
   margin-top: 30px;
-  font-size: 13px;
-  opacity: 0.4;
+}
+
+/* ---- Timeline ---- */
+
+.timeline-years {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.year {
+  border: 1px solid #ccc;
+  padding: 12px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.year.active-year {
+  background: #ff4d88;
+  color: white;
+  border-color: #ff4d88;
+}
+
+.timeline-content {
+  margin-top: 30px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.back-btn {
+  margin-top: 30px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <div class="photo"></div>
-
-  <h1>Happy Valentine's Day ❤️</h1>
-
-  <button onclick="openCard()">Open a card</button>
-
-  <div class="signature">
-    From: vibecoder → To: real developer
+<!-- SCREEN 1 -->
+<div class="screen active" id="hero">
+  <div class="card">
+    <div class="photo"></div>
+    <h1>Happy Valentine's Day ❤️</h1>
+    <button onclick="goToDashboard()">Open a card</button>
+    <div class="signature">
+      From: vibecoder → To: real developer
+    </div>
   </div>
+</div>
 
-  <div class="hidden-message" id="message">
-    Roma, you’re my favourite person to build life with. ❤️  
-    Thank you for being my calm, my chaos, my co-founder,  
-    and my forever adventure.
+<!-- SCREEN 2 -->
+<div class="screen" id="dashboard">
+  <div class="card">
+    <h1>Roma × Natasha</h1>
+    <p>Core KPIs</p>
+
+    <div class="grid">
+      <div class="kpi" onclick="reveal(this)">
+        <h3>❤️ Love Expressions</h3>
+        <div class="kpi-value">233</div>
+      </div>
+
+      <div class="kpi" onclick="reveal(this)">
+        <h3>😂 Shared Laughs</h3>
+        <div class="kpi-value">318</div>
+      </div>
+
+      <div class="kpi" onclick="reveal(this)">
+        <h3>✈ Adventures</h3>
+        <div class="kpi-value">18</div>
+      </div>
+    </div>
+
+    <button class="timeline-btn" onclick="goToTimeline()">View Timeline</button>
   </div>
+</div>
 
-  <div class="footer">
-    Built with love. Deployed with courage.
+<!-- SCREEN 3 -->
+<div class="screen" id="timeline">
+  <div class="card">
+    <h1>Long-Term Product Vision</h1>
+
+    <div class="timeline-years">
+      <div class="year active-year" onclick="showYear(2022, this)">2022</div>
+      <div class="year" onclick="showYear(2023, this)">2023</div>
+      <div class="year" onclick="showYear(2024, this)">2024</div>
+      <div class="year" onclick="showYear(2025, this)">2025</div>
+      <div class="year" onclick="showYear(2040, this)">2040</div>
+    </div>
+
+    <div class="timeline-content" id="timelineText">
+      We met — instant product-market fit.
+    </div>
+
+    <button class="back-btn" onclick="goToDashboard()">← Back</button>
   </div>
 </div>
 
 <script>
-function openCard() {
-  const msg = document.getElementById("message");
-  msg.style.display = "block";
+
+function goToDashboard() {
+  document.getElementById("hero").classList.remove("active");
+  document.getElementById("dashboard").classList.add("active");
 }
+
+function goToTimeline() {
+  document.getElementById("dashboard").classList.remove("active");
+  document.getElementById("timeline").classList.add("active");
+}
+
+function reveal(el) {
+  el.querySelector(".kpi-value").style.display = "block";
+}
+
+function showYear(year, el) {
+  document.querySelectorAll(".year").forEach(y => y.classList.remove("active-year"));
+  el.classList.add("active-year");
+
+  const texts = {
+    2022: "Discovery phase. We met. It clicked.",
+    2023: "Belgrade era. First home together.",
+    2024: "Startup mode. Dubai relocation.",
+    2025: "London. Identity shift. Growth.",
+    2040: "Living on returns. Playing tennis by the ocean."
+  };
+
+  document.getElementById("timelineText").innerText = texts[year];
+}
+
 </script>
 
 </body>
