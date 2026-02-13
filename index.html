@@ -236,9 +236,14 @@ button:hover{
   margin-bottom:22px;
 }
 
+.timeline-actions {
+  margin-top: 18px; 
+  text-align: left;
+}
+  
 .years{
   display:flex;
-  justify-content:space-between;
+  justify-content:center;
   align-items:center;
   margin:18px 0 26px;
   position:relative;
@@ -294,8 +299,14 @@ button:hover{
   font-size:15px;
 }
 
+.year-content p {
+  margin: 8px 0;
+  opacity: 0.95;
+}
+  
 .highlight{
   margin-top:16px;
+  margin-bottom: 18px; 
   padding:12px 16px;
   background:#f9f9f9;
   border-radius:14px;
@@ -308,6 +319,50 @@ button:hover{
   h1{font-size:40px;}
   h2{font-size:30px;}
 }
+
+/* Mobile timeline: dots instead of year pills */
+@media (max-width: 520px) {
+  .years {
+    gap: 10px;
+    margin: 14px 0 22px;
+  }
+
+  .year {
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    padding: 0;
+    color: transparent;
+    border: 1px solid #ddd;
+  }
+
+  .year.active {
+    width: 18px;
+    height: 18px;
+    background: #ff5c93;
+    border: none;
+  }
+
+  /* показываем год только у активной точки */
+  .year.active::before {
+    content: attr(data-year);
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 800;
+    color: #111;
+    white-space: nowrap;
+  }
+
+  /* сердечко только у активной точки */
+  .year.active::after {
+    top: -18px;
+    font-size: 14px;
+  }
+}
+  
 </style>
 </head>
 
@@ -412,78 +467,64 @@ const timelineData = {
         <h3>2022 — Discovery Phase</h3>
         <p>We met — and something just clicked. No overthinking, no explanations needed. Just momentum.</p>
         <p>It felt like every weekend was a product launch.</p>
-        <ul>
-          <li>🔥 Instant product–market fit (and we both knew it).</li>
-          <li>✈️ Travel wasn’t a bonus feature — it was the default setting.</li>
-          <li>🌙 Long night talks without checking the clock.</li>
-          <li>❤️ High-frequency affection and emotional uptime.</li>
-          <li>😂 First inside jokes and our own shared language.</li>
-        </ul>
+          <p>🔥 Instant product–market fit (and we both knew it).<p>
+          <p>✈️ Travel wasn’t a bonus feature — it was the default setting.<p>
+          <p>🌙 Long night talks without checking the clock.<p>
+          <p>❤️ High-frequency affection and emotional uptime.<p>
+          <p>😂 First inside jokes and our own shared language.<p>
         <div class="highlight">The chemistry was so obvious that doubt didn’t even pass triage.</div>
       `,
       2023: `
         <h3>2023 — Build Mode: Belgrade Edition</h3>
         <p>We chose stability. We chose each other. We built a home together.</p>
-        <ul>
-          <li>🏠 First apartment fully furnished together.</li>
-          <li>🛋 IKEA logistics sprint (no relationship incidents).</li>
-          <li>☕ Slow mornings became a ritual.</li>
-          <li>🤝 Learned how to disagree without breaking anything important.</li>
-        </ul>
+          <p>🏠 First apartment fully furnished together.<p>
+          <p>🛋 IKEA logistics sprint (no relationship incidents).<p>
+          <p>☕ Slow mornings became a ritual.<p>
+          <p>🤝 Learned how to disagree without breaking anything important.<p>
         <div class="highlight">Love stopped being fireworks and became foundation.</div>
       `,
       2024: `
         <h3>2024 — Ambition & Relocation</h3>
         <p>Startup energy. Career shifts. Big decisions.</p>
-        <ul>
-          <li>🚀 Worked intensely on our shared project.</li>
-          <li>💼 Both changed jobs.</li>
-          <li>🌍 Moved from Belgrade to Dubai.</li>
-          <li>🧠 Grew resilience under real-world pressure.</li>
-        </ul>
+          <p>🚀 Worked intensely on our shared project.<p>
+          <p>💼 Both changed jobs.<p>
+          <p>🌍 Moved from Belgrade to Dubai.<p>
+          <p>🧠 Grew resilience under real-world pressure.<p>
         <div class="highlight">We proved we can scale under load.</div>
       `,
       2025: `
         <h3>2025 — London Era & Meaning Crisis</h3>
         <p>New country. New identity. Some chaos. Some doubt.</p>
-        <ul>
-          <li>🇬🇧 Relocated to London.</li>
-          <li>🤯 Faced a crisis of meaning and constant change.</li>
-          <li>💬 “If anything — we’ll just move to Bali.” became our stabilising joke.</li>
-          <li>❤️ Learned that partnership matters more than geography.</li>
-        </ul>
+          <p>🇬🇧 Relocated to London.<p>
+          <p>🤯 Faced a crisis of meaning and constant change.<p>
+          <p>💬 “If anything — we’ll just move to Bali.” became our stabilising joke.<p>
+          <p>❤️ Learned that partnership matters more than geography.<p>
         <div class="highlight">We don’t run from uncertainty — we face it together.</div>
       `,
       2026: `
         <h3>2026 — Maturity & Clarity</h3>
         <p>Less noise. More intention.</p>
-        <ul>
-          <li>📈 Smarter decisions.</li>
-          <li>🧘 Emotional regulation upgraded.</li>
-          <li>🏗 Building long-term systems, not just moments.</li>
-        </ul>
+          <p>📈 Smarter decisions.<p>
+          <p>🧘 Emotional regulation upgraded.<p>
+          <p>🏗 Building long-term systems, not just moments.<p>
         <div class="highlight">From spark to strategy.</div>
       `,
       2030: `
         <h3>2030 — Compounded Love</h3>
         <p>We’re not guessing anymore. We’re designing life deliberately.</p>
-        <ul>
-          <li>🏡 Home base secured.</li>
-          <li>💰 Investments working quietly.</li>
-          <li>🎾 Tennis dates still competitive.</li>
-          <li>✈️ Adventures still deployed quarterly.</li>
-        </ul>
+          <p>🏡 Home base secured.<p>
+          <p>💰 Investments working quietly.<p>
+          <p>🎾 Tennis dates still competitive.<p>
+          <p>✈️ Adventures still deployed quarterly.<p>
         <div class="highlight">Built with love. Scaled with care.</div>
       `,
       2040: `
         <h3>2040 — Freedom Mode</h3>
         <p>Ocean nearby. Financial independence. Calm confidence.</p>
-        <ul>
-          <li>🏖 Living partly by the beach.</li>
-          <li>📊 Income from assets, not alarms.</li>
-          <li>🎾 Morning tennis. Slow evenings.</li>
-          <li>💬 Still choosing each other daily.</li>
-        </ul>
+          <p>🏖 Living partly by the beach.<p>
+          <p>📊 Income from assets, not alarms.<p>
+          <p>🎾 Morning tennis. Slow evenings.<p>
+          <p>💬 Still choosing each other daily.<p>
         <div class="highlight">Roma, you’re my favourite person to build life with. ❤️</div>
       `
     };
