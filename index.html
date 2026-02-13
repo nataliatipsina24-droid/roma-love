@@ -320,46 +320,86 @@ button:hover{
   h2{font-size:30px;}
 }
 
-/* Mobile timeline: dots instead of year pills */
+/* ===== Mobile timeline: dots + labels (first/last + active) ===== */
 @media (max-width: 520px) {
   .years {
-    gap: 10px;
-    margin: 14px 0 22px;
+    gap: 12px;
+    margin: 14px 0 26px;
+    padding: 0 6px 18px;  /* место под подписи */
+    position: relative;
+  }
+
+  .years::before {
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .year {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     border-radius: 999px;
     padding: 0;
-    color: transparent;
     border: 1px solid #ddd;
+    background: #fff;
+    color: transparent;   /* прячем "2022" внутри */
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+    position: relative;
+    flex: 0 0 auto;
   }
 
   .year.active {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     background: #ff5c93;
     border: none;
   }
 
-  /* показываем год только у активной точки */
+  /* подписи под первой и последней точкой */
+  .year:first-child::before,
+  .year:last-child::before {
+    content: attr(data-year);
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.55);
+    white-space: nowrap;
+  }
+
+  /* подпись активного года — жирная и контрастная */
   .year.active::before {
     content: attr(data-year);
     position: absolute;
-    top: 22px;
+    top: 28px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 900;
     color: #111;
     white-space: nowrap;
   }
 
-  /* сердечко только у активной точки */
+  /* сердечко только у активной */
   .year.active::after {
+    content: "💗";
+    position: absolute;
     top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 14px;
+  }
+
+  .timeline-actions {
+    margin-top: 18px;
+    text-align: center;
+  }
+
+  #backBtn {
+    margin-top: 8px;
   }
 }
   
